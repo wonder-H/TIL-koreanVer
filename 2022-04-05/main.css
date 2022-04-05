@@ -1,0 +1,197 @@
+/* 
+-----------------------css 방식-------------------------
+태그이름 {
+  width: 100px;
+-> 속성 : 값 ;
+(property : value)
+} 
+
+ex//////////
+div {
+  width: 100px;
+  height: 100px;
+  background-color: bisque;
+  margin: 20px;
+}
+
+
+---------------------속성의 기본값---------------------
+* 속성은 기본값을 가진다. 
+  ex/////////
+  width, height의 기본값은 auto, min-width는 0, max-width는 none
+  
+  속성이 가진 기본값을 알아둬야 한다!!
+  MDN문서를 참고하면서 찾아보자
+  https://developer.mozilla.org/ko/docs/Web/CSS/initial_value
+
+
+
+----------------------reset-css CDN--------------------------
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+
+* css적용 전 브라우저가 가진 기본 스타일값을 초기화하자
+
+
+
+---------------margin 중첩현상(Margin-Collapsing)-----------------
+* margin 중첩은 좌,우에서는 발생하지 않는다. 상/하 일때만 발생!
+
+  상황 1. 부모-자식관계 요소들의 margin-top이 서로 만나면 중첩
+  상황 2. 부모-자식관계 요소들의 margin-bottom이 서로 만나면 중첩
+    - 부모요소는 margin값이 없을 때, 자식요소가 margin값을 가지면 그 값을 뺏어간다 
+
+  상황 3. 형제요소끼리 margin-top, margin-bottm으로 만나면 중첩
+  
+* 따라서 margin적용 전에 중첩 현상을 염두하고 값을 계산해서 적용해야 한다
+또는 부모요소에 overflow:hidden을 적용하거나, padding:값 추가, 기타 레이아웃 설정(position) 등 다양한 방법을 통해 해결할 수 있다
+그치만 overflow같은 것은 너무 남발하면 문제가 생기니... 유의
+
+ex///////
+.parent {
+  width: 200px;
+  height: 200px;
+  background-color: blueviolet;
+}
+.child {
+  width: 100px;
+  height: 100px;
+  background-color: brown;
+  margin-top: 20px;
+}
+
+
+
+-----------------------박스 사이징-------------------------
+box-sizing의 기본값은 content-box
+box-sizing은 CSS 테두리 영역의 크기를 결정한다
+가로,세로값을 정하고 padding, border값이 정해지면
+
+content-box : width, height를 컨텐츠 영역에만 적용 border, padding, margin은 따로 계산
+-> 전체 영역이 설정값보다 커질 수 있음
+border-box : width, height를 전체 영역에 적용 border, padding, margin을 모두 합산
+-> 컨텐츠 영역이 설정값보다 적어질 수 있음
+
+ex////////////////
+
+.box1 {
+  width: 100px;
+  height: 100px;
+  background-color: brown;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 20px solid blanchedalmond;
+}
+.box2 {
+  width: 100px;
+  height: 100px;
+  background-color: brown;
+}
+
+
+------------------------말줄임표 효과 적용----------------------
+letter-spacing속성은 자간
+word-spacing속성은 단어 사이 간격
+white-space속성은 공백 처리 방법(스페이스와 탭 | 줄바꿈 | 자동줄바꿈 처리) nowrap
+
+* css로 말줄임표 효과를 적용하려면 white-space:nowrap, overflow:hidden, text-overflow:ellipsis 세 가지 속성:값을 사용
+
+* border속성의 색상값을 넣지 않았을 때에는 글자의 색상을 상속받는다
+
+ex///////
+div {
+  width: 200px;
+  border: 1px solid ;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+------------------중국어,일어,한글 줄바꿈 해주기---------------------
+word-break: keep-all
+
+ex/////////
+div {
+  width: 200px;
+  border: 4px solid;
+  word-break: keep-all;
+
+}
+
+
+---------------------글자가 영역을 벗어날 때 글자단위로 줄바꿈---------------------------------
+overflow-wrap: break-word;
+
+ex/////////
+div {
+  width: 200px;
+  border: 4px solid;
+  overflow-wrap: break-word;
+}
+
+
+--------------------------background-size--------------------------------
+  background-size
+  - cover는 넓은 너비기준/ w,h중 더 넓은 쪽에 맞추고 잘리지 않음
+  - contain은 짧은 너비기준/ w,h중 더 짧은 쪽에 맞춰서 잘릴 수 있음 
+  
+  text-indent: -9999px;
+  - 글자 들여쓰기(음수면 내어쓰기) 
+
+ex//////////
+div {
+  width: 200px;
+  height: 200px;
+  background-image: url("https://images.freeimages.com/slider/slider1.jpg");
+  background-size: cover; 
+
+  border: 3px solid;
+  text-indent: -9999px;
+}
+  
+
+----------------그라디언트는 background - color가 아닌 - image로...----------------------------------------  
+각도 설정시 시계 방향으로 회전
+0deg 는 아래->위 
+90deg는 왼쪽->오른쪽
+숫자가 음수값이면 시계 반대 방향으로 회전
+
+ex//////
+div {
+  width: 200px;
+  height: 200px;
+  background-image: linear-gradient(45deg, red, blue);
+}
+
+
+---------------------float속성-------------------------
+display:flex 전에 많이 사용했던 속성..
+이제는 거의 안쓰임
+주로 수평정렬같은 것을 위해 썼다 
+
+float를 이용해 수평정렬하는 방법
+- 가상 요소이용하기( .clearfix::after )
+  가상 요소는 inline이지만 block형태로 바꾸고, clear:both로 float의 끝점을 막는다
+ex//////////  */
+  .text {
+    width: 600px;
+    margin: 0 auto;
+    padding-top: 70px;
+  }
+  .text img {
+    height: 200px;
+    float: right;
+  }
+
+  .clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .container div{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+    float: left;
+  }
