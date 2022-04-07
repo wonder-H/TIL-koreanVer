@@ -1,0 +1,160 @@
+/* position 속성 
+
+relative = 자기 자신을 기준으로 움직임. 하지만 직접적으로 얘를 움직이진 않는다.
+주로 위치상의 부모를 설정하기 위해 사용
+
+*** 구조적으로, 혹은 시각적으로 더 높고 넓은 녀석들은 css에서도 순서를 위에 올려주자 ***
+
+body {
+  width: 4000px;
+  height: 9000px;
+}
+
+.grand {
+  width: 400px;
+  height: 300px;
+  background-color: green;
+  overflow: auto;
+}
+
+.parent {
+  width: 1000px;
+  height: 2000px;
+  background-color: orange;
+  border: 2px solid;
+  
+}
+
+.child {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border: 2px solid;
+
+}
+
+.child.c1 {
+  position: sticky;
+  top: 20px;
+  left: -20px;
+}
+
+--------------------------------------
+
+display: flex
+1차원 레이아웃, 1개의 축을 기준으로 삼아서 정렬
+flex-container
+flex-items
+
+float같은 옛날 방식은 자식에 개별적으로 지정하고 조정했으나, 최근 방식인 flex나 grid는 부모요소에서 대부분 제어한다.
+
+- display: flex -> 해당 요소를 display-containder로 만들고 자식 요소들은 item으로 적용된다
+
+- flex-direction: x축(가로),y축(세로)을 설정
+
+- flex는 기본적으로 1줄에서만 모든 아이템들을 정렬하려고 시도하기 때문에 2줄 이상을 원한다면 flex-wrap으로 줄바꿈을 설정해줘야 한다
+
+- justify -> 수평 정렬, 기본값은 flex-start, 1줄 정렬에는 justify-items, 2줄 이상일때는 justify-content
+- align -> 수직 정렬, 기본값은 stratch, 1줄만 정렬할때는 align-items, 2줄 이상일때는 aligncontent
+
+
+**flex를 사용할 때에는 브라우저 크기가 바뀔때마다 크기를 유지/변경하는 요소들을 생각해서 처리해줘야함
+
+
+.container {
+  display:flex -> 이 요소를 flex-containder로 만들기, 자식 요소들은 자동으로 flex items가 됨 
+  display: flex;
+  height: 400px;
+  margin: 30px;
+  border: 2px solid red;
+
+}
+.item {
+  width: 100px;
+  height: 100px;
+  border: 2px solid;
+  font-size: 40px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.item:nth-child(2){
+  flex-grow: 2;
+}
+
+
+
+body{
+  padding: 20px;
+}
+
+.search {
+  display: flex;
+}
+
+.search input {
+  height: 50px;
+  flex-grow: 1;
+}
+
+.search .search-btn {
+  height: 50px;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+
+body {
+  padding: 20px;
+}
+
+.container {
+  height: 300px;
+  border: 2px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.item {
+  width: 100px;
+  height: 100px;
+  border: 2px solid;
+}
+.item:nth-child(2){
+  height: auto;
+  align-self: stretch;
+}
+*/
+
+/* calc() - 다른 단위의 수치를 연산할 수 있다! */
+
+body * {
+  border: 1px solid;
+  box-sizing: border-box;
+}
+header {
+  height: 70px;
+}
+main {
+  height: calc(100vh - 70px);
+  display: flex;
+}
+main nav {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main nav .header {
+  height: 40px;
+}
+main nav .contents {
+  flex-grow: 1;
+  overflow: auto;
+}
+main nav .footer {
+  height: 100px;
+}
+main section {
+  width: calc(100% - 200px);
+  height: 100%;
+}
