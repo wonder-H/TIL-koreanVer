@@ -223,6 +223,7 @@ none | inline | block | inline-block | flex | grid
 
   2. inline: 요소를 inline속성으로 적용
        - 글자요소처럼 되는 것
+       - 주변 요소들과 한 줄에서 같이 나열됨
        - 글자요소이기 때문에 width, height을 넣을 수 없음
        - margin은 위/아래쪽 적용불가
        - padding은 좌/우방향이 공간/시각적 여백이 모두 생기지만 상/하는 시각적으로 추가만 되고 실제 공간을 차지하지는 않게 적용됨
@@ -233,12 +234,16 @@ none | inline | block | inline-block | flex | grid
        - 상자요소처럼 되는 것
        - 상자요소이기 때문에 width, height, margin, paddin을 넣을 수 있음
        - 상자라서 가로 영역을 모두 차지하려고 함(block 요소의 특성)
+       - 1줄당 1개만 배치되는 특성(주변 요소들과 같이 나열 불가)
 
 <br> 
 
   4. inline-block: 요소 밖은 inline처럼, 내부는 block처럼 적용
        - 밖의 다른 요소들과의 관계는 inline요소인 녀석으로 처리됨
+       - 밖의 요소들과는 한 줄에서 같이 나열 가능(inline특성)
        - 요소의 내부에서는 block처럼 동작
+       - 줄바꿈 안됨(block특성)
+       - width, height 지정 가능(block특성)
 
 <br> 
 
