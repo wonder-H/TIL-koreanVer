@@ -1,0 +1,118 @@
+/*  ================================ transform + transition ======================================
+
+
+실제로는 16진수값인 #를 이용해 색상 사용
+.container {
+  width: min-content쓰면 블록요소도 내용(컨텐트) 길이에 맞춰서 최대한 줄어듦!!
+  width: max-content쓰면 요소가 내용(컨텐트) 길이에 맞춰 최대한 늘어남!!
+  width: min-content;
+  background-color: royalblue;
+  
+  원근감은 부모한테 적용할것
+  perspective: 600px;
+  바라보는 기준 축(x, y)
+  perspective-origin: 50%  0%;
+
+  하위 요소들한테도 부모의 3d효과를 유지한채로 또 3D를 적용하려면 사용
+  transform-style: preserve-3d;
+}
+
+.container img {
+  img태그는 기본값 인라인이기 때문에 요소 아래쪽에서 요상한 공백이 자동으로 생김
+  그래서 block으로 바꿔주면 해결가능.. 될수있으면 img는 그냥 block으로 만들어주자
+  
+  display: block;
+  
+  1. transition효과는 가상요소나 가상클래스에 넣지 않는 것이 좋다. 
+  그냥 원래 original요소 자체에 넣어주는게 더 자연스러움
+  2. 중복으로 같은 요소를 다른 곳에서 또 넣지말자. 에러날 수 있음...
+
+  transition-duration: 1s;
+
+  변환효과의 기준점 설정(x축 y축)
+  transform-origin: 100% 0%;
+}
+
+.container:hover img {
+  transform에서 perspective()를 쓰려면 무조건 제일 앞에 써줘야 동작함 
+  transform: rotateY(45deg) scale(0.5);
+
+}
+
+*/
+
+
+/* ================================ animation ================================== 
+
+.container {
+  width: min-content;
+  background-color: bisque;
+  perspective: 600%;
+}
+
+.container img {
+  transition-duration: 1s;
+  
+animation을 제어하는 속성들
+
+animation-delay @keyframes녀석의 시작 시간
+animation-direction @keyframes의 애니메이션 종료 후에, 처음부터 시작할지 / 역방향으로 진행할지 결정
+animation-duration @keyframes을 진행할 총 시간
+animation-iteration-count @keyframes 애니메이션 반복 횟수
+animation-name @keyframes 녀석의 이름
+animation-timing-function @keyframes 녀석의 전환 형태
+animation-play-state @keyframes 녀석의 애니메이션 재생 상태(재생 or 중지)
+animation-fill-mode @keyframes 녀석이 실행중이 아닐 때(종료 or 대기) 요소의 스타일
+
+세밀한 제어는 js를 쓰는게 좋음.
+바운스, 중지, 일시 중지, 되감기, 감속 등의 고급스러운 효과 => js is better...
+그렇지만 가능하다면 css를 활용하는 것이 속도 효율에서는 더 좋음.
+
+
+  animation-name: rolling;
+  animation-duration: 2s;
+  animation-timing-function: linear; 
+  animation-delay: 0s;
+  animation-iteration-count: 2;
+  animation-direction: alternate-reverse;
+
+보통 both나 none만 써도 됨...
+  animation-fill-mode: none;
+  animation-play-state: running;
+}
+
+.container:hover img {
+  transform: rotateY(45deg);
+  animation-play-state: paused;
+
+}
+
+
+@keyframes rolling{
+0%{
+  transform: translateX(0deg);
+}
+100%{
+  transform: translateX(360deg);
+}
+}
+
+*/
+
+
+body {
+  padding: 30px;
+}
+
+.container {
+  padding: 20px;
+  border: 4px solid;
+  column-width: 100px;
+  /* 만들고 싶은 최대 단 숫자 */
+  column-count: 2;
+  /* 기본적으로 다단 관련된 것은 브라우저가 알아서 최적화 시키니
+  기본 조건만 제공해도 됨
+   */
+  column-gap: 30px;
+  column-rule: 1px solid red;
+}
