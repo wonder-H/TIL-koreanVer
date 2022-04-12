@@ -1,0 +1,98 @@
+/*
+img {
+  display: block;
+}
+.container {
+  border: 4px solid;
+  width: min-content;
+  filter!!
+  요소 자체를 필터처리할 수 있음!!
+
+  blur - 흐림처리
+  brightness - 밝기
+  grayscale - 흑백처리 (%조절 가능!!!!!)
+  contrast - 대비
+  drop-shadow - 그림자효과
+  hue-rotate - 색조를 각도값으로(왜..?) 적용
+  saturate - 채도
+  opacity - 불투명도
+  invert - 색상반전
+  sepia - 세피아 효과
+  
+  filter: grayscale(50%);
+}
+.container .filter {
+    width: 200px;
+    height: 100px;
+    border: 4px solid;
+    position: absolute;
+    top: 50px;
+    left: 130px;
+    backdrop-filter는 요소의 배경에 효과를 적용해줌 
+    backdrop-filter: blur(10px);
+}
+*/
+
+/* 
+.container {
+  display: grid;
+  border: 4px solid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px); 
+  rows는 보통 줄바꿈되면 자연스럽게 늘어나야 하므로 auto로 적용하는 경우가 많음
+  grid-auto-rows: 100px;
+  grid-auto-flow: dense; 공간 없으면 그다음 녀석이 가능하다면 채우기 
+  gap: 10px 20px;
+}
+.item {
+  border: 1px solid;
+  background-color: #fff;
+}
+.item:nth-child(2){
+  span 3 ==> 현위치로부터 셀3개의 공간을 가져가기 
+  grid-column: span 3; 
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
+  z-index: 0;
+}
+.item:nth-child(6){
+  order: -1;
+}
+.item:nth-child(7){
+  grid-column: 2 / 4;
+  grid-row: 2 / 3;
+}
+*/
+
+.container {
+  border: 4px solid;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 100px 200px 100px;
+  
+/* area이름에 맞춰서 틀을 분배
+  화면의 구조를 css로 볼 수 있으나
+  레이아웃이 복잡해지면.. 더 복잡할수도 있음
+ */
+  grid-template-areas: 
+  "header header" 
+  "main aside" 
+  "footer footer";
+}
+
+.item {
+  border: 1px solid;
+}
+/* area이름을 지정 */
+.item:nth-child(1){
+  grid-area: header;
+}
+.item:nth-child(2){
+  grid-area: main;
+}
+.item:nth-child(3){
+  grid-area: aside;
+}
+.item:nth-child(4){
+  grid-area: footer;
+}
