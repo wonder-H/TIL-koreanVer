@@ -1,0 +1,24 @@
+/* html == :root */
+
+.group1 {
+  /* css에서 변수만들고 적용시키기
+  -- 변수선언 키워드
+  : 할당(=) */
+  --primary: orange;
+  
+  --danger: green;
+
+}
+
+.box {
+  width: 100px;
+  height: 200px;
+  /* var선언 후 변수사용해야함 */
+  /* var(--변수명, 해당 변수나 값이 적용되지 않았을 때의 기본값 설정) */
+  background-color: var(--danger, red);
+  border: 4px solid;
+  margin: 20px;
+}
+/*  @media 타입 and (기능명시) */
+/*  @media 타입 and (기능명시) and (기능) */
+
