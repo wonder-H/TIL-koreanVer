@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <script type="module" defer src="main.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model="title" @keydown.enter="searchMovies(true)" />
+      <button @click="searchMovies(true)">Search</button>
+      <ul>
+        <li v-for="movie in movies" :key="movie.id">
+          <img :src="movie.poster" :alt="movie.title" height="40" />
+          {{movie.Title}}
+        </li>
+      </ul>
+      <button v-if="movies.length" @click="searchMovies()">More</button>
+      <h1>{{ msg }}</h1>
+      <h2>{{ reverseMsg() }}</h2>
+      <h2>{{ reverseMsg() }}</h2>
+      <h2>{{ reverseMsg() }}</h2>
+      <h3>{{ reversedMsg }}</h3>
+      <h3>{{ reversedMsg }}</h3>
+      <h3>{{ reversedMsg }}</h3>
+
+      <button @click="getset = 12345678">Set Button</button>
+    </div>
+
+    <!-- vue 기본 -->
+    <div id="vue-app" style="display: none">
+      <!-- 디렉티브 사용하기 -->
+      <!-- v-bind:로 input태그 value 속성에 vue 반응형 data 연결하기-->
+      <!-- <input :value="title" /> -->
+      <!-- 양방향은 v-model로 -->
+      <input v-model="title" @keydown.enter="searchMovies(true)" />
+      <!-- v-on:으로 이벤트 연결하기 -->
+
+      <!-- 이벤트 발생 시 메소드 실행 -->
+      <!-- ()없으면 이벤트 객체가 들어오고, ()로 원하는 값 전달 가능 -->
+      <button @click="searchMovies(true)">Search</button>
+      <!-- v-for로 리스트 랜더링 -->
+      <ul>
+        <li v-for="movie in movies" :key="movie.imdbID">
+          <img :src="movie.Poster" :alt="movie.Title" height="40" />
+          {{movie.Title}}
+        </li>
+      </ul>
+      <!-- 0은 falsy고 1부터는 truthy이므로 굳이 연산자 이용할 필요 없음 -->
+      <button v-if="movies.length" @click="searchMovies()">More</button>
+    </div>
+  </body>
+</html>
